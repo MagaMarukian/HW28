@@ -84,13 +84,15 @@ class BankUser:
     def user_account_details(self):
         if self.pass_not_pass():
             return False
-        user_password = input('Enter your password: ')
-        if user_password != self.__password:
-            self.PASSWORD_COUNT += 1
-            return 'Wrong password'
-        else:
-            is_not_correct = False
-            return (self.__account, self.__amount)
+        is_not_correct = True
+        while is_not_correct and self.PASSWORD_COUNT < 3:
+            user_password = input('Enter your password: ')
+            if user_password != self.__password:
+                self.PASSWORD_COUNT += 1
+                print('Wrong password')
+            else:
+                is_not_correct = False
+                return (self.__account, self.__amount)
         
     def add_money(self, money_in: int|float) -> int|float:
         if self.pass_not_pass():
@@ -121,7 +123,7 @@ print(User_3.name_surname())
 # print(User_3.add_money(120))
 # print(User_3.take_money(10))
 print(User_3.user_account_details())
-print(User_3.pass_not_pass())
+print(User_3.name_surname())
 
        
 
